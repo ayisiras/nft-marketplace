@@ -6,7 +6,6 @@ import "./NFTMarketplace.sol";
 // ERC20标准与安全转账
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
-// 【已修正】Chainlink价格预言机导入路径
 import "@chainlink/contracts/src/v0.8/shared/interfaces/AggregatorV3Interface.sol";
 
 /**
