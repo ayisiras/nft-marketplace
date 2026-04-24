@@ -1,4 +1,5 @@
 ##项目目录
+```bash
 nft-marketplace/
 ├── contracts/
 │ ├── MyNFT.sol # NFT 基础合约（无升级）
@@ -14,6 +15,7 @@ nft-marketplace/
 ├── .env # 环境变量（RPC / 私钥）
 ├── package.json # 项目依赖
 └── README.md # 项目说明文档
+```
 ## 🧩 合约功能说明
 ### 1. MyNFT.sol
 - 标准 ERC721 NFT
