@@ -207,7 +207,7 @@ contract NFTMarketplace is ReentrancyGuard, IERC721Receiver, Initializable {
         uint256 refund = msg.value - listing.price;
 
         // 第三步：转移NFT
-        IERC721(listing.nftContract).safeTransferFrom(listing.seller, msg.sender, listing.tokenId);
+       IERC721(listing.nftContract).safeTransferFrom(listing.seller, msg.sender, listing.tokenId);
 
         // 第四步：转账给卖家
         (bool sellerTransfer, ) = listing.seller.call{value: sellerProceed}("");
@@ -263,6 +263,8 @@ contract NFTMarketplace is ReentrancyGuard, IERC721Receiver, Initializable {
             endTime: block.timestamp + durationHours * 1 hours,
             active: true
         });
+         // 转移NFT到合约
+        IERC721(nftContract).safeTransferFrom(msg.sender, address(this), tokenId);
 
         emit AuctionCreated(auctionCounter, msg.sender, nftContract, tokenId, startPrice, auctions[auctionCounter].endTime);
         return auctionCounter;
@@ -328,7 +330,7 @@ contract NFTMarketplace is ReentrancyGuard, IERC721Receiver, Initializable {
             uint256 sellerProceed = finalBid - fee;
 
             // 转移NFT给赢家
-            IERC721(auction.nftContract).safeTransferFrom(auction.seller, winner, auction.tokenId);
+			IERC721(auction.nftContract).safeTransferFrom(address(this), winner,auction.tokenId);
             (bool s1, ) = auction.seller.call{value: sellerProceed}("");
             require(s1, "Seller failed");
 

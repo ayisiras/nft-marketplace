@@ -102,7 +102,8 @@ contract NFTMarketplaceV1 is NFTMarketplace {
 
         // 记录支付币种
         auctionBidToken[auctionCounter] = bidToken;
-
+        // 转移NFT到合约
+        IERC721(nftContract).safeTransferFrom(msg.sender, address(this), tokenId);
         emit AuctionCreated(auctionCounter, msg.sender, nftContract, tokenId, startPrice, a.endTime);
         return auctionCounter;
     }
@@ -185,7 +186,7 @@ contract NFTMarketplaceV1 is NFTMarketplace {
         uint256 sellerAmount = l.price - fee;
 
         // 转移NFT
-        IERC721(l.nftContract).safeTransferFrom(l.seller, msg.sender, l.tokenId);
+        IERC721(l.nftContract).safeTransferFrom(address(this), msg.sender, l.tokenId);
 
         // ETH支付
         if (token == ETH_ADDRESS) {
@@ -221,7 +222,7 @@ contract NFTMarketplaceV1 is NFTMarketplace {
             uint256 sellerAmount = finalBid - fee;
 
             // 转移NFT给赢家
-            IERC721(a.nftContract).safeTransferFrom(a.seller, winner, a.tokenId);
+            IERC721(a.nftContract).safeTransferFrom(address(this), winner,a.tokenId);
 
             // ETH结算
             if (payToken == ETH_ADDRESS) {

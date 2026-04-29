@@ -45,6 +45,12 @@ contract MyNFT is ERC721, ERC721URIStorage, Ownable {
         return super.tokenURI(tokenId);
     }
 
+    /**
+     * @dev 检查接口支持
+     * @param interfaceId 接口ID
+     * @return 是否支持该接口
+     * @notice 实现ERC165标准，支持接口查询
+     */
     function supportsInterface(bytes4 interfaceId) public view override(ERC721, ERC721URIStorage) returns (bool) {
         return super.supportsInterface(interfaceId);
     }

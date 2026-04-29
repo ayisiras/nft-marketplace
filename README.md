@@ -83,6 +83,11 @@ NFT 铸造费用：0.01 ETH
 运行
 npx hardhat test
 ```
+## 3.1 生成覆盖率报告
+npx hardhat test --coverage
+# 只运行Mocha测试并生成覆盖率
+npx hardhat test mocha --coverage
+
 ## 4. 部署
 4.1 本地全量部署（旧版 + 新版）
 ```bash
